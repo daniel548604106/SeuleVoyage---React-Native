@@ -1,10 +1,11 @@
 import React from "react";
 import { Text, View } from "react-native";
+import { RootTabScreenProps } from "../types";
 
-const AccountScreen = () => {
+const AccountScreen = ({ navigation }: RootTabScreenProps<"Account">) => {
   return (
     <View>
-      <Text>Account</Text>
+      <Text>Accounast</Text>
     </View>
   );
 };
