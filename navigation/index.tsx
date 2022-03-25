@@ -25,6 +25,7 @@ import {
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import AccountScreen from "../screens/AccountScreen";
+import ChatRoomScreen from "../screens/ChatRoomScreen";
 import HomeScreen from "../screens/HomeScreen";
 import MessageScreen from "../screens/MessageScreen";
 import ModalScreen from "../screens/ModalScreen";
@@ -73,6 +74,7 @@ function RootNavigator() {
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="ChatRoom" component={ChatRoomScreen} />
         <Stack.Screen
           name="Message"
           component={MessageScreen}
