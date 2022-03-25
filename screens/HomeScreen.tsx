@@ -41,7 +41,7 @@ const HomeScreen = () => {
       <ScrollView style={{ padding: 10 }}>
         {Array.from({ length: 10 }).map(() => (
           <View style={{ marginBottom: 20 }}>
-            <Post />
+            <Post isLiked={true} />
           </View>
         ))}
       </ScrollView>

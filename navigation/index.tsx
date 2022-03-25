@@ -4,6 +4,8 @@
  *
  */
 import { FontAwesome } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+import { EvilIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
@@ -12,11 +14,19 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Image, Pressable, StyleSheet } from "react-native";
+import {
+  Button,
+  ColorSchemeName,
+  Image,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import AccountScreen from "../screens/AccountScreen";
 import HomeScreen from "../screens/HomeScreen";
+import MessageScreen from "../screens/MessageScreen";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
@@ -63,6 +73,50 @@ function RootNavigator() {
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen
+          name="Message"
+          component={MessageScreen}
+          options={({ navigation }) => ({
+            title: "Your Messages",
+            headerTitleAlign: "center",
+            headerLeft: () => (
+              <Pressable
+                onPress={() => navigation.goBack()}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <EvilIcons name="chevron-left" size={24} color="black" />{" "}
+              </Pressable>
+            ),
+            headerRight: () => (
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Pressable
+                  onPress={() => console.log("search")}
+                  style={({ pressed }) => ({
+                    opacity: pressed ? 0.5 : 1,
+                  })}
+                >
+                  <EvilIcons name="search" size={24} color="black" />
+                </Pressable>
+                <Pressable
+                  onPress={() => console.log("search")}
+                  style={({ pressed }) => ({
+                    opacity: pressed ? 0.5 : 1,
+                  })}
+                >
+                  <EvilIcons name="bell" size={24} color="black" />{" "}
+                </Pressable>
+              </View>
+            ),
+          })}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -96,19 +150,34 @@ function BottomTabNavigator() {
             />
           ),
           headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Modal")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
+            <View style={styles.headerRightContainer}>
+              <Pressable
+                onPress={() => navigation.navigate("Modal")}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <FontAwesome
+                  name="info-circle"
+                  size={25}
+                  color={Colors[colorScheme].text}
+                  style={{ marginRight: 15 }}
+                />
+              </Pressable>
+              <Pressable
+                onPress={() => navigation.navigate("Message")}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <Feather
+                  name="message-circle"
+                  size={24}
+                  color="black"
+                  style={{ marginRight: 15 }}
+                />
+              </Pressable>
+            </View>
           ),
         })}
       />
@@ -166,6 +235,11 @@ function TabBarIcon(props: {
 const styles = StyleSheet.create({
   navRow: {
     backgroundColor: "black",
+  },
+  headerRightContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
   defaultIcon: {
     backgroundColor: "red",
