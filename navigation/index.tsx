@@ -217,6 +217,7 @@ function BottomTabNavigator() {
         component={AccountScreen}
         options={{
           title: "Account",
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
