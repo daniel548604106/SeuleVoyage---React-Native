@@ -18,6 +18,7 @@ export type RootStackParamList = {
   Modal: undefined;
   Message: undefined;
   ChatRoom: { chatId: number; name: string };
+  Notification: undefined;
   NotFound: undefined;
 };
 

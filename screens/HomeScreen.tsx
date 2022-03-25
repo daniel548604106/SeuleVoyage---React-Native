@@ -20,6 +20,7 @@ const HomeScreen = () => {
       <View style={styles.storyContainer}>
         <FlatList
           horizontal
+          keyExtractor={(item, index) => `${index}`}
           data={Array.from({ length: 20 }).map(() => ({
             text: 'Add Story',
             image:

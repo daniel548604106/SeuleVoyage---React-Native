@@ -19,6 +19,7 @@ import HomeScreen from '../screens/HomeScreen';
 import MessageScreen from '../screens/MessageScreen';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
+import NotificationScreen from '../screens/NotificationScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -57,6 +58,9 @@ function RootNavigator() {
         component={NotFoundScreen}
         options={{ title: 'Oops!' }}
       />
+      <Stack.Group screenOptions={{ presentation: 'formSheet' }}>
+        <Stack.Screen name="Notification" component={NotificationScreen} />
+      </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'card' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
         <Stack.Screen
@@ -109,7 +113,7 @@ function RootNavigator() {
                   <EvilIcons name="search" size={24} color="black" />
                 </Pressable>
                 <Pressable
-                  onPress={() => console.log('search')}
+                  onPress={() => navigation.navigate('Notification')}
                   style={({ pressed }) => ({
                     opacity: pressed ? 0.5 : 1,
                   })}
