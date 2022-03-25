@@ -9,18 +9,45 @@ import {
   View,
 } from "react-native";
 import { useAppDispatch } from "../hooks/useAppRedux";
-import { setIsLoggedIn } from "../redux/slices/globalSlice";
+import { setIsLoggedIn, setUser } from "../redux/slices/globalSlice";
 import { colors } from "../styles/AppStyles";
-
 import { SvgUri } from "react-native-svg";
-const AccountScreen = () => {
-  const [authType, setAuthType] = useState("login");
+
+// import axios from "axios";
+
+const AuthScreen = () => {
   const dispatch = useAppDispatch();
 
+  const [authType, setAuthType] = useState("login");
+  const [isLoading, setIsLoading] = useState(false);
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
+
+  const handleAuth = async () => {
+    setIsLoading(true);
+    try {
+      const { token, user } = await fetch(
+        `http://192.168.1.62:3000/api/auth/${authType}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify(loginData),
+        }
+      ).then((res) => res.json());
+
+      dispatch(setUser(user));
+      dispatch(setIsLoggedIn(true));
+    } catch (error) {
+      console.log(error, "errorr");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <View
@@ -87,11 +114,15 @@ const AccountScreen = () => {
           </TouchableOpacity>
         </View>
         <TouchableOpacity
-          onPress={() => dispatch(setIsLoggedIn(true))}
+          onPress={() => handleAuth()}
           style={styles.authButton}
         >
           <Text style={{ color: "#fff", fontWeight: "bold" }}>
-            {authType === "login" ? "Login" : "Sign Up"}
+            {isLoading
+              ? "loading..."
+              : authType === "login"
+              ? "Login"
+              : "Sign Up"}
           </Text>
         </TouchableOpacity>
       </View>
@@ -103,7 +134,9 @@ const AccountScreen = () => {
               setAuthType(authType === "login" ? "signup" : "login")
             }
           >
-            <Text style={{ color: colors.main }}>Sign up</Text>
+            <Text style={{ color: colors.main }}>
+              {authType === "login" ? "Sign Up" : "Login"}
+            </Text>
           </TouchableOpacity>
         </Text>
       </View>
@@ -111,7 +144,7 @@ const AccountScreen = () => {
   );
 };
 
-export default AccountScreen;
+export default AuthScreen;
 
 const styles = StyleSheet.create({
   authTitle: {
