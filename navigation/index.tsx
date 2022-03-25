@@ -4,8 +4,7 @@
  *
  */
 import { FontAwesome } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
-import { EvilIcons } from "@expo/vector-icons";
+import { Feather, EvilIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
@@ -145,12 +144,7 @@ function BottomTabNavigator() {
         component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<"Home">) => ({
           title: "Home",
-          tabBarIcon: ({ color }) => (
-            <Image
-              style={styles.defaultIcon}
-              source={require("../assets/images/tabs/home.svg")}
-            />
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
             <View style={styles.headerRightContainer}>
               <Pressable
@@ -189,10 +183,7 @@ function BottomTabNavigator() {
         options={{
           title: "Explore",
           tabBarIcon: ({ color }) => (
-            <Image
-              style={{ width: 40, height: 40 }}
-              source={require("../assets/images/tabs/navigator.svg")}
-            />
+            <TabBarIcon name="instagram" color={color} />
           ),
         }}
       />
@@ -201,7 +192,7 @@ function BottomTabNavigator() {
         component={TabTwoScreen}
         options={{
           title: "Travel",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="plane" color={color} />,
         }}
       />
       <BottomTab.Screen
@@ -209,7 +200,9 @@ function BottomTabNavigator() {
         component={TabTwoScreen}
         options={{
           title: "Gallery",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="gamepad" color={color} />
+          ),
         }}
       />
       <BottomTab.Screen
@@ -218,7 +211,9 @@ function BottomTabNavigator() {
         options={{
           title: "Account",
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="user-circle-o" color={color} />
+          ),
         }}
       />
     </BottomTab.Navigator>
