@@ -1,41 +1,27 @@
+import * as React from 'react';
+import { Button, ColorSchemeName, Image, Pressable, StyleSheet, View } from 'react-native';
+
 /**
  * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from "@expo/vector-icons";
-import { Feather, EvilIcons } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
-} from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import * as React from "react";
-import {
-  Button,
-  ColorSchemeName,
-  Image,
-  Pressable,
-  StyleSheet,
-  View,
-} from "react-native";
-import Colors from "../constants/Colors";
-import useColorScheme from "../hooks/useColorScheme";
-import AccountScreen from "../screens/AccountScreen";
-import ChatRoomScreen from "../screens/ChatRoomScreen";
-import HomeScreen from "../screens/HomeScreen";
-import MessageScreen from "../screens/MessageScreen";
-import ModalScreen from "../screens/ModalScreen";
-import NotFoundScreen from "../screens/NotFoundScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
-import {
-  RootStackParamList,
-  RootTabParamList,
-  RootTabScreenProps,
-} from "../types";
-import LinkingConfiguration from "./LinkingConfiguration";
+import { EvilIcons, Feather, FontAwesome } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { DarkTheme, DefaultTheme, NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import Colors from '../constants/Colors';
+import useColorScheme from '../hooks/useColorScheme';
+import AccountScreen from '../screens/AccountScreen';
+import ChatRoomScreen from '../screens/ChatRoomScreen';
+import HomeScreen from '../screens/HomeScreen';
+import MessageScreen from '../screens/MessageScreen';
+import ModalScreen from '../screens/ModalScreen';
+import NotFoundScreen from '../screens/NotFoundScreen';
+import TabTwoScreen from '../screens/TabTwoScreen';
+import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
+import LinkingConfiguration from './LinkingConfiguration';
 
 export default function Navigation({
   colorScheme,
@@ -45,7 +31,7 @@ export default function Navigation({
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
     >
       <RootNavigator />
     </NavigationContainer>
@@ -69,17 +55,17 @@ function RootNavigator() {
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
-        options={{ title: "Oops!" }}
+        options={{ title: 'Oops!' }}
       />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
+      <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
         <Stack.Screen name="ChatRoom" component={ChatRoomScreen} />
         <Stack.Screen
           name="Message"
           component={MessageScreen}
           options={({ navigation }) => ({
-            title: "Your Messages",
-            headerTitleAlign: "center",
+            title: 'Your Messages',
+            headerTitleAlign: 'center',
             headerLeft: () => (
               <Pressable
                 onPress={() => navigation.goBack()}
@@ -87,19 +73,19 @@ function RootNavigator() {
                   opacity: pressed ? 0.5 : 1,
                 })}
               >
-                <EvilIcons name="chevron-left" size={24} color="black" />{" "}
+                <EvilIcons name="chevron-left" size={24} color="black" />
               </Pressable>
             ),
             headerRight: () => (
               <View
                 style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
                 }}
               >
                 <Pressable
-                  onPress={() => console.log("search")}
+                  onPress={() => console.log('search')}
                   style={({ pressed }) => ({
                     opacity: pressed ? 0.5 : 1,
                   })}
@@ -107,12 +93,12 @@ function RootNavigator() {
                   <EvilIcons name="search" size={24} color="black" />
                 </Pressable>
                 <Pressable
-                  onPress={() => console.log("search")}
+                  onPress={() => console.log('search')}
                   style={({ pressed }) => ({
                     opacity: pressed ? 0.5 : 1,
                   })}
                 >
-                  <EvilIcons name="bell" size={24} color="black" />{" "}
+                  <EvilIcons name="bell" size={24} color="black" />
                 </Pressable>
               </View>
             ),
@@ -142,13 +128,13 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Home"
         component={HomeScreen}
-        options={({ navigation }: RootTabScreenProps<"Home">) => ({
-          title: "Home",
+        options={({ navigation }: RootTabScreenProps<'Home'>) => ({
+          title: 'Home',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
             <View style={styles.headerRightContainer}>
               <Pressable
-                onPress={() => navigation.navigate("Modal")}
+                onPress={() => navigation.navigate('Modal')}
                 style={({ pressed }) => ({
                   opacity: pressed ? 0.5 : 1,
                 })}
@@ -161,7 +147,7 @@ function BottomTabNavigator() {
                 />
               </Pressable>
               <Pressable
-                onPress={() => navigation.navigate("Message")}
+                onPress={() => navigation.navigate('Message')}
                 style={({ pressed }) => ({
                   opacity: pressed ? 0.5 : 1,
                 })}
@@ -181,7 +167,7 @@ function BottomTabNavigator() {
         name="Explore"
         component={TabTwoScreen}
         options={{
-          title: "Explore",
+          title: 'Explore',
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="instagram" color={color} />
           ),
@@ -191,7 +177,7 @@ function BottomTabNavigator() {
         name="Travel"
         component={TabTwoScreen}
         options={{
-          title: "Travel",
+          title: 'Travel',
           tabBarIcon: ({ color }) => <TabBarIcon name="plane" color={color} />,
         }}
       />
@@ -199,7 +185,7 @@ function BottomTabNavigator() {
         name="Gallery"
         component={TabTwoScreen}
         options={{
-          title: "Gallery",
+          title: 'Gallery',
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="gamepad" color={color} />
           ),
@@ -209,8 +195,8 @@ function BottomTabNavigator() {
         name="Account"
         component={AccountScreen}
         options={{
-          title: "Account",
-          headerShown: false,
+          title: 'Account',
+          // headerShown: false,
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="user-circle-o" color={color} />
           ),
@@ -224,7 +210,7 @@ function BottomTabNavigator() {
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
+  name: React.ComponentProps<typeof FontAwesome>['name'];
   color: string;
 }) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
@@ -232,25 +218,25 @@ function TabBarIcon(props: {
 
 const styles = StyleSheet.create({
   navRow: {
-    backgroundColor: "black",
+    backgroundColor: 'black',
   },
   headerRightContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   defaultIcon: {
-    backgroundColor: "red",
+    backgroundColor: 'red',
   },
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: 20,
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   link: {
     marginTop: 15,
@@ -258,6 +244,6 @@ const styles = StyleSheet.create({
   },
   linkText: {
     fontSize: 14,
-    color: "#2e78b7",
+    color: '#2e78b7',
   },
 });

@@ -1,17 +1,11 @@
-import React from "react";
+import React from 'react';
 import {
-  Button,
-  FlatList,
-  Image,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import Post from "../components/Home/Post";
-import { useAppDispatch } from "../hooks/useAppRedux";
-import { setIsLoggedIn, setUser } from "../redux/slices/globalSlice";
+    Button, FlatList, Image, SafeAreaView, ScrollView, StyleSheet, Text, View
+} from 'react-native';
+
+import Post from '../components/Home/Post';
+import { useAppDispatch } from '../hooks/useAppRedux';
+import { setIsLoggedIn, setUser } from '../redux/slices/globalSlice';
 
 const HomeScreen = () => {
   const dispatch = useAppDispatch();
@@ -25,12 +19,12 @@ const HomeScreen = () => {
     <SafeAreaView>
       <ScrollView horizontal>
         <View style={styles.storyContainer}>
-          {Array.from({ length: 8 }).map(() => (
-            <View style={styles.storyWrapper}>
+          {Array.from({ length: 8 }).map((_, index) => (
+            <View key={index} style={styles.storyWrapper}>
               <Image
                 style={styles.storyImage}
                 source={{
-                  uri: "https://images.unsplash.com/photo-1647985070722-3532322755fb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=685&q=80",
+                  uri: 'https://images.unsplash.com/photo-1647985070722-3532322755fb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=685&q=80',
                 }}
               />
               <Text style={styles.storyDescription}>Add Story</Text>
@@ -39,8 +33,8 @@ const HomeScreen = () => {
         </View>
       </ScrollView>
       <ScrollView style={{ padding: 10 }}>
-        {Array.from({ length: 10 }).map(() => (
-          <View style={{ marginBottom: 20 }}>
+        {Array.from({ length: 10 }).map((_, index) => (
+          <View key={index} style={{ marginBottom: 20 }}>
             <Post isLiked={true} />
           </View>
         ))}
@@ -54,9 +48,9 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   storyContainer: {
-    display: "flex",
-    flexDirection: "row",
-    overflow: "scroll",
+    display: 'flex',
+    flexDirection: 'row',
+    overflow: 'scroll',
     paddingHorizontal: 10,
     paddingVertical: 10,
   },
@@ -69,7 +63,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   storyDescription: {
-    textAlign: "center",
+    textAlign: 'center',
     marginTop: 5,
     fontSize: 12,
   },

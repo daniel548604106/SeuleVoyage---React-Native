@@ -1,28 +1,21 @@
-import React, { useState } from "react";
-import {
-  Button,
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { useAppDispatch } from "../hooks/useAppRedux";
-import { setIsLoggedIn, setUser } from "../redux/slices/globalSlice";
-import { colors } from "../styles/AppStyles";
-import { SvgUri } from "react-native-svg";
+import React, { useState } from 'react';
+import { Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { SvgUri } from 'react-native-svg';
+
+import { useAppDispatch } from '../hooks/useAppRedux';
+import { setIsLoggedIn, setUser } from '../redux/slices/globalSlice';
+import { colors } from '../styles/AppStyles';
 
 // import axios from "axios";
 
 const AuthScreen = () => {
   const dispatch = useAppDispatch();
 
-  const [authType, setAuthType] = useState("login");
+  const [authType, setAuthType] = useState('login');
   const [isLoading, setIsLoading] = useState(false);
   const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   const handleAuth = async () => {
@@ -32,10 +25,10 @@ const AuthScreen = () => {
         `http://192.168.1.62:3000/api/auth/${authType}`,
         {
           headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
           },
-          method: "POST",
+          method: 'POST',
           body: JSON.stringify(loginData),
         }
       ).then((res) => res.json());
@@ -43,7 +36,7 @@ const AuthScreen = () => {
       dispatch(setUser(user));
       dispatch(setIsLoggedIn(true));
     } catch (error) {
-      console.log(error, "errorr");
+      console.log(error, 'errorr');
     } finally {
       setIsLoading(false);
     }
@@ -53,14 +46,14 @@ const AuthScreen = () => {
     <View
       style={{
         flex: 1,
-        alignItems: "center",
-        flexDirection: "column",
-        justifyContent: "center",
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'center',
       }}
     >
       <View>
         <Text style={styles.authTitle}>Welcome</Text>
-        {authType === "login" ? (
+        {authType === 'login' ? (
           <Text style={styles.authDescription}>Login to Continue!</Text>
         ) : (
           <Text style={styles.authDescription}>Sign Up!</Text>
@@ -103,39 +96,39 @@ const AuthScreen = () => {
         />
         <View
           style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-end",
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
             marginBottom: 20,
           }}
         >
           <TouchableOpacity onPress={() => dispatch(setIsLoggedIn(true))}>
-            <Text style={{ fontWeight: "bold" }}>Forgot Password?</Text>
+            <Text style={{ fontWeight: 'bold' }}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity
           onPress={() => handleAuth()}
           style={styles.authButton}
         >
-          <Text style={{ color: "#fff", fontWeight: "bold" }}>
+          <Text style={{ color: '#fff', fontWeight: 'bold' }}>
             {isLoading
-              ? "loading..."
-              : authType === "login"
-              ? "Login"
-              : "Sign Up"}
+              ? 'loading...'
+              : authType === 'login'
+              ? 'Login'
+              : 'Sign Up'}
           </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.authToggleWrapper}>
-        <Text style={{ display: "flex", flexDirection: "row" }}>
+        <Text style={{ display: 'flex', flexDirection: 'row' }}>
           I'm a new user ,
           <TouchableOpacity
             onPress={() =>
-              setAuthType(authType === "login" ? "signup" : "login")
+              setAuthType(authType === 'login' ? 'signup' : 'login')
             }
           >
             <Text style={{ color: colors.main }}>
-              {authType === "login" ? "Sign Up" : "Login"}
+              {authType === 'login' ? 'Sign Up' : 'Login'}
             </Text>
           </TouchableOpacity>
         </Text>
@@ -149,39 +142,39 @@ export default AuthScreen;
 const styles = StyleSheet.create({
   authTitle: {
     fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
+    fontWeight: 'bold',
+    textAlign: 'center',
     marginBottom: 6,
   },
   authDescription: {
     fontSize: 18,
-    fontWeight: "bold",
-    textAlign: "center",
+    fontWeight: 'bold',
+    textAlign: 'center',
     marginBottom: 20,
   },
   authButton: {
     borderRadius: 10,
-    textAlign: "center",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    textAlign: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     height: 50,
     backgroundColor: colors.main,
   },
   oAuthWrapper: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
     width: 300,
     marginBottom: 20,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   oAuthButton: {
     borderRadius: 20,
-    backgroundColor: "#fff",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     borderColor: colors.gray,
     borderWidth: 4,
     width: 80,
@@ -195,7 +188,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   authToggleWrapper: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 20,
     zIndex: 20,
   },

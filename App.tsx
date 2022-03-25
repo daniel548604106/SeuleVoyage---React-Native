@@ -1,13 +1,13 @@
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { StatusBar } from 'expo-status-bar';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux';
 
-import useCachedResources from "./hooks/useCachedResources";
-import useColorScheme from "./hooks/useColorScheme";
-import Navigation from "./navigation";
-import { Provider } from "react-redux";
-import { store } from "./redux/store";
-import { useAppSelector } from "./hooks/useAppRedux";
-import AuthScreen from "./screens/AuthScreen";
+import { useAppSelector } from './hooks/useAppRedux';
+import useCachedResources from './hooks/useCachedResources';
+import useColorScheme from './hooks/useColorScheme';
+import Navigation from './navigation';
+import { store } from './redux/store';
+import AuthScreen from './screens/AuthScreen';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
