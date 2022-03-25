@@ -1,12 +1,18 @@
 import React from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Image, Pressable, ScrollView, Text, View } from 'react-native';
 
 import { colors } from '../styles/AppStyles';
 import { RootTabScreenProps } from '../types';
 
-const Message = () => {
+const Message = ({ navigation }: RootTabScreenProps<'Account'>) => {
   return (
-    <View
+    <Pressable
+      onPress={() =>
+        navigation.navigate('ChatRoom', {
+          chatId: 19,
+          name: 'Daniel Yeh',
+        })
+      }
       style={{
         display: 'flex',
         flexDirection: 'row',
@@ -50,7 +56,7 @@ const Message = () => {
           12
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -59,7 +65,7 @@ const MessageScreen = ({ navigation }: RootTabScreenProps<'Account'>) => {
     <View>
       <ScrollView>
         {Array.from({ length: 20 }).map((_, index) => (
-          <Message key={index} />
+          <Message key={index} navigation={navigation} />
         ))}
       </ScrollView>
     </View>

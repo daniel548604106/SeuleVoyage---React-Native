@@ -57,9 +57,25 @@ function RootNavigator() {
         component={NotFoundScreen}
         options={{ title: 'Oops!' }}
       />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+      <Stack.Group screenOptions={{ presentation: 'card' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
-        <Stack.Screen name="ChatRoom" component={ChatRoomScreen} />
+        <Stack.Screen
+          name="ChatRoom"
+          component={ChatRoomScreen}
+          options={({ navigation, route }) => ({
+            title: route.params.name,
+            headerLeft: () => (
+              <Pressable
+                onPress={() => navigation.goBack()}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <EvilIcons name="chevron-left" size={24} color="black" />
+              </Pressable>
+            ),
+          })}
+        />
         <Stack.Screen
           name="Message"
           component={MessageScreen}
